@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*read_to_lesft(int fd, char *left_str)
+char	*read_to_left(int fd, char *left_str)
 {
 	char	*buffer;
 	int		r_bytes;

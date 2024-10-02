@@ -41,7 +41,7 @@ char	*ft_strchr(const char *str, int c)
 }
 // Busca la primera aparicion de "c" en "str"
 
-char	*ft_strjoin(char *left_str, char const *buffer)
+char	*ft_strjoin(char *left_str, char *buffer)
 {
 	char 	*str;
 	size_t	i;
@@ -54,11 +54,11 @@ char	*ft_strjoin(char *left_str, char const *buffer)
 	}
 	if (!str || !buffer)
 		return (NULL);
+	str = malloc((ft_strlen(left_str) + ft_strlen(buffer) + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
 	else
 	{
-		str = (char *)malloc((ft_strlen(left_str) + ft_strlen(buffer) + 1) * sizeof(char));
-		if (!str)
-			return (NULL);
 		i = -1;
 		while (left_str[++i]);
 			str[i] = left_str[i];

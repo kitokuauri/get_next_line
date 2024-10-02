@@ -20,8 +20,14 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-char					*get_next_line(int fd);
+char				*get_next_line(int fd);
+char                *read_to_left(int fd, char *left_str);
 
-unsigned long int		ft_strlen(char *str);
+char                *get_line(char *left_str);
+char                *new_left_str(char *left_str);
+
+unsigned long int   ft_strlen(char *str);
+char                *ft_strchr(const char *str, int c);
+char                *ft_strjoin(char *left_str, char *buffer)
 
 #endif
