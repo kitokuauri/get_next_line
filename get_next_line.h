@@ -28,6 +28,6 @@ char                *new_left_str(char *left_str);
 
 unsigned long int   ft_strlen(char *str);
 char                *ft_strchr(const char *str, int c);
-char                *ft_strjoin(char *left_str, char *buffer)
+char                *ft_strjoin(char *left_str, char *buffer);
 
 #endif
