@@ -6,7 +6,7 @@
 /*   By: aursuare <aursuare@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 21:30:34 by aursuare          #+#    #+#             */
-/*   Updated: 2024/09/30 18:31:57 by aursuare         ###   ########.fr       */
+/*   Updated: 2024/10/07 18:28:05 by aursuare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*read_to_left(int fd, char *left_str)
 	if (!buffer)
 		return (NULL);
 	r_bytes = 1;
-	while (!ft_strchr(left_str, "\n") && r_bytes != 0)
+	while (!ft_strchr(left_str, '\n') && r_bytes != 0)
 	{
 		r_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (r_bytes == -1)
@@ -29,7 +29,7 @@ char	*read_to_left(int fd, char *left_str)
 			free(buffer);
 			return (NULL);
 		}
-		buffer[r_bytes] = "\0";
+		buffer[r_bytes] = '\0';
 		left_str = ft_strjoin(left_str, buffer);
 	}
 	free(buffer);
