@@ -17,6 +17,8 @@ unsigned long int	ft_strlen(char *str)
 	unsigned long int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);
@@ -57,12 +59,13 @@ char	*ft_strjoin(char *left_str, char *buffer)
 	if (!str)
 		return (NULL);
 	i = -1;
-	while (left_str[++i])
-		str[i] = left_str[i];
+	if (left_str)
+		while (left_str[++i])
+			str[i] = left_str[i];
 	j = 0;
 	while (buffer[j])
 		str[i++] = buffer[j++];
-	str[i] = '\0';
+	str[ft_strlen(left_str) + ft_strlen(buffer)] = '\0';
 	free(left_str);
 	return (str);
 }
