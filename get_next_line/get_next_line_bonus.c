@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aursuare <aursuare@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 21:30:34 by aursuare          #+#    #+#             */
-/*   Updated: 2024/10/17 12:06:53 by aursuare         ###   ########.fr       */
+/*   Updated: 2024/10/17 12:19:39 by aursuare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_read_to_left(int fd, char *content)
 {
@@ -39,14 +39,14 @@ char	*ft_read_to_left(int fd, char *content)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*content;
+	static char	*content[FOPEN_MAX];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= FOPEN_MAX)
 		return (0);
-	content = ft_read_to_left(fd, content);
-	if (!content)
+	content[fd] = ft_read_to_left(fd, content[fd]);
+	if (!content[fd])
 		return (NULL);
-	line = ft_get_line(content);
-	content = new_content(content);
+	line = ft_get_line(content[fd]);
+	content[fd] = new_content(content[fd]);
 	return (line);
 }
