@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aursuare <aursuare@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 18:21:01 by aursuare          #+#    #+#             */
-/*   Updated: 2024/10/17 11:19:35 by aursuare         ###   ########.fr       */
+/*   Created: 2024/10/17 11:09:46 by aursuare          #+#    #+#             */
+/*   Updated: 2024/10/17 12:45:49 by aursuare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,32 @@ int main(int argc, char *argv[])
 	char	*line;
 	int		i;
 	int		fd;
+	int		j;
 
 	if (argc < 2)
 	{
 		printf("Ha olvidado el fichero.\n");
         return (1);
 	}
-	fd = open(argv[FOPEN_MAX], O_RDONLY);
-	i = 0;
-	line = get_next_line_bonus(fd);
-	while (line != NULL)
+	i = 1;
+	while (index < argc)
 	{
-		i++;
-		printf("line [%02d]: %s", i, line);
-		free(line);
+		fd = open(argv[i], O_RDONLY);
+		printf("Archivo: %s\n", argv[i]);
+		j = 0;
 		line = get_next_line_bonus(fd);
-	}
+		while (line != NULL)
+		{
+			j++;
+			printf("line [%02d]: %s", j, line);
+			free(line);
+			line = get_next_line_bonus(fd);
+		}
 	close(fd);
+	}
 	return (0);
 }
 
 // Compilar con "cc -Wall -Werror -Wextra -D BUFFER_SIZE=?? get_next_line.c get_next_line_utils.c main.c"
+// BONUS "cc -Wall -Werror -Wextra -D BUFFER_SIZE=?? get_next_line_bonus.c get_next_line_utils_bonus.c main.c"
+
