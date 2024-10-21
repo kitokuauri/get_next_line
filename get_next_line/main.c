@@ -27,18 +27,18 @@ int main(int argc, char *argv[])
         return (1);
 	}
 	i = 1;
-	while (index < argc)
+	while (i < argc)
 	{
 		fd = open(argv[i], O_RDONLY);
 		printf("Archivo: %s\n", argv[i]);
 		j = 0;
-		line = get_next_line_bonus(fd);
+		line = get_next_line(fd);
 		while (line != NULL)
 		{
 			j++;
 			printf("line [%02d]: %s", j, line);
 			free(line);
-			line = get_next_line_bonus(fd);
+			line = get_next_line(fd);
 		}
 	close(fd);
 	}

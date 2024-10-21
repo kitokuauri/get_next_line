@@ -44,67 +44,67 @@ char	*ft_strchr(char *str, int c)
 
 // Busca c (en este caso sera '\n') dentro del str.
 
-char	*ft_strjoin(char *left_str, char *buffer)
+char	*ft_strjoin(char *content, char *buffer)
 {
 	char	*str;
 	size_t	i;
 	size_t	j;
 
-	if (!left_str)
+	if (!content)
 	{
-		left_str = (char *)malloc(1 * sizeof(char));
-		left_str[0] = '\0';
+		content = (char *)malloc(1 * sizeof(char));
+		content[0] = '\0';
 	}
-	if (!left_str || !buffer)
+	if (!content || !buffer)
 		return (NULL);
-	str = malloc((ft_strlen(left_str) + ft_strlen(buffer) + 1) * sizeof(char));
+	str = malloc((ft_strlen(content) + ft_strlen(buffer) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i = -1;
-	while (left_str[++i])
-		str[i] = left_str[i];
+	while (content[++i])
+		str[i] = content[i];
 	j = 0;
 	while (buffer[j])
 		str[i++] = buffer[j++];
-	str[ft_strlen(left_str) + ft_strlen(buffer)] = '\0';
-	free(left_str);
+	str[ft_strlen(content) + ft_strlen(buffer)] = '\0';
+	free(content);
 	return (str);
 }
 
 /*
-Concatena el contenido de "left_str", que ya se ha leido pero no procesado, y el buffer con los datos
+Concatena el contenido de "content", que ya se ha leido pero no procesado, y el buffer con los datos
 	recien leidos.
 
-- Si no hay nada en "left_str" (como sucede la primera vez que se llama a GNL), le asignamos memoria para
+- Si no hay nada en "content" (como sucede la primera vez que se llama a GNL), le asignamos memoria para
 	contener un string vacio, ya que aun no se ha rellenado, esta todo el contenido en el buffer.
 
-- Reservamos para "str" suficiente memoria para contener "left_str" y "buffer" + \0.
+- Reservamos para "str" suficiente memoria para contener "content" y "buffer" + \0.
 
-- Copiamos en "str" el contenido de "left_str" y despues el de "buffer" e incluimos el nulo final.
+- Copiamos en "str" el contenido de "content" y despues el de "buffer" e incluimos el nulo final.
 */
 
-char	*get_line(char *left_str)
+char	*ft_get_line(char *content)
 {
 	int		i;
 	char	*str;
 
 	i = 0;
-	if (!left_str[i])
+	if (!content[i])
 		return (NULL);
-	while (left_str[i] && left_str[i] != '\n')
+	while (content[i] && content[i] != '\n')
 		i++;
 	str = (char *)malloc(sizeof(char) * (i + 2));
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
+	while (content[i] && content[i] != '\n')
 	{
-		str[i] = left_str[i];
+		str[i] = content[i];
 		i++;
 	}
-	if (left_str[i] == '\n')
+	if (content[i] == '\n')
 	{
-		str[i] = left_str[i];
+		str[i] = content[i];
 		i++;
 	}
 	str[i] = '\0';
@@ -112,51 +112,51 @@ char	*get_line(char *left_str)
 }
 
 /*
-Toma el contenido de "left_str" y extrae la primera linea.
+Toma el contenido de "content" y extrae la primera linea.
 
 - Reserva memoria para la linea extraida (despues de comprovar la cantidad de caracteres hasta un
 	salto de linea). Asigna "i + 2" para dar espacio a la linea + \n + \0.
 
-- Se copia el contenido de "left_str" en "str" hasta el salto de linea y luego, si es que hay un
+- Se copia el contenido de "content" en "str" hasta el salto de linea y luego, si es que hay un
 	\n, se copia tambien (en el if final).
 */
 
-char	*new_left_str(char *left_str)
+char	*new_content(char *content)
 {
 	int		i;
 	int		j;
 	char	*str;
 
 	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
+	while (content[i] && content[i] != '\n')
 		i++;
-	if (!left_str[i])
+	if (!content[i])
 	{
-		free(left_str);
+		free(content);
 		return (NULL);
 	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen(left_str) - i + 1));
+	str = (char *)malloc(sizeof(char) * (ft_strlen(content) - i + 1));
 	if (!str)
 		return (NULL);
 	i++;
 	// nos saltamos aqui el \n
 	j = 0;
-	while (left_str[i])
-		str[j++] = left_str[i++];
+	while (content[i])
+		str[j++] = content[i++];
 	str[j] = '\0';
-	free(left_str);
+	free(content);
 	return (str);
 }
 
 /*
-Elimina la linea procesada (e insertada ya en "line") de "left_str".
+Elimina la linea procesada (e insertada ya en "line") de "content".
 
-- Recorre "left_str" hasta encontrar un \n, si no lo encuentra libera la variable y retorna NULL
+- Recorre "content" hasta encontrar un \n, si no lo encuentra libera la variable y retorna NULL
 	porque no existen mas lineas.
 
 - Se reverva memoria para el string que contendra lo que quede tras el salto de linea (liongitud de
-	"left_str" - i que contiene lo que hay hasta el salto de linea + \0)
+	"content" - i que contiene lo que hay hasta el salto de linea + \0)
 
-- Copiamos el contenido tras el \n de "left_str" a "str" + el nulo, y liberamos "left_str"
+- Copiamos el contenido tras el \n de "content" a "str" + el nulo, y liberamos "content"
 	ya que ya no lo necesitamos.
 */
