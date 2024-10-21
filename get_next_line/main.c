@@ -40,7 +40,8 @@ int main(int argc, char *argv[])
 			free(line);
 			line = get_next_line(fd);
 		}
-	close(fd);
+		i++;
+		close(fd);
 	}
 	return (0);
 }
