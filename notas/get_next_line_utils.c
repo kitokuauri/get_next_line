@@ -60,8 +60,8 @@ char	*ft_strjoin(char *content, char *buffer)
 	str = malloc((ft_strlen(content) + ft_strlen(buffer) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	i = -1;
-	while (content[++i])
+	i = 0;
+	while (content[i++])
 		str[i] = content[i];
 	j = 0;
 	while (buffer[j])
