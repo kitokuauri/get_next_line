@@ -6,15 +6,15 @@
 /*   By: aursuare <aursuare@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 21:31:42 by aursuare          #+#    #+#             */
-/*   Updated: 2024/10/17 11:55:49 by aursuare         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:35:00 by aursuare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-unsigned long int	ft_strlen(char *str)
+size_t	ft_strlen(char *str)
 {
-	unsigned long int	i;
+	size_t	i;
 
 	i = 0;
 	if (!str)
@@ -26,7 +26,7 @@ unsigned long int	ft_strlen(char *str)
 
 char	*ft_strchr(char *str, int c)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -55,12 +55,12 @@ char	*ft_strjoin(char *content, char *buffer)
 	}
 	if (!content || !buffer)
 		return (NULL);
-	str = malloc((ft_strlen(content) + ft_strlen(buffer) + 1) * sizeof(char));
+	str = malloc(((ft_strlen(content) + ft_strlen(buffer)) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	i = 0;
+	i = -1;
 	if (content)
-		while (content[i++])
+		while (content[++i])
 			str[i] = content[i];
 	j = 0;
 	while (buffer[j])
